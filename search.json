@@ -1,0 +1,807 @@
+[
+  {
+    "objectID": "labs/lab-2.html",
+    "href": "labs/lab-2.html",
+    "title": "Visualizing and Summarizing Numerical Data",
+    "section": "",
+    "text": "Let’s load the following packages:\n\nThe tidyverse “umbrella” package which houses a suite of many different R packages for data wrangling and data visualization\nNote: This did not work last week, but should this week!\nThe openintro R package: houses the dataset we will be working with\n\n\n# Package for functions \nlibrary(tidyverse)\n\n# Package for data\nlibrary(openintro)\n\n\n\n\nThe Bureau of Transportation Statistics (BTS) is a statistical agency that is a part of the Research and Innovative Technology Administration (RITA). As its name implies, BTS collects and makes transportation data available, such as the flights data we will be working with in this lab.\nFirst, we’ll view the nycflights data frame. Run the following code to load in the data:\n\ndata(nycflights)\n\nThe codebook (description of the variables) can be accessed by pulling up the help file by typing a ? before the name of the dataset:\n\n?nycflights\n\nRemember that you can use glimpse() to take a quick peek at your data to understand its contents better.\nQuestion 1\n(a) How large is the nycflights dataset? (i.e. How many rows and columns does it have?)\n(b) Are there numerical variables in the dataset? If so, what are their names?\n\n# You code for exercise 1 goes here! \n\n\n\n\nLet’s start by examining the distribution of departure delays (dep_delay) of all flights with a histogram.\nQuestion 2 – Create a histogram of the dep_delay variable from the nycflights data\n\n# Your code for exercise 2 goes here! \n\nHistograms are generally a very good way to see the shape of a single distribution of numerical data, but that shape can change depending on how the data is split between the different bins.\nYou can easily define the binwidth you want to use, by specifying the binwidth argument inside of geom_histogram(), like so: geom_histogram(binwidth = 15)\nQuestion 3\n(a) Make two other histograms, one with a binwidth of 15 and one with a binwidth of 150.\n\n# Your code for exercise 3 goes here! \n\n\n\n\n(b) How do these three histograms compare? Are features revealed in one that are obscured in another?"
+  },
+  {
+    "objectID": "labs/lab-2.html#getting-started",
+    "href": "labs/lab-2.html#getting-started",
+    "title": "Visualizing and Summarizing Numerical Data",
+    "section": "",
+    "text": "Let’s load the following packages:\n\nThe tidyverse “umbrella” package which houses a suite of many different R packages for data wrangling and data visualization\nNote: This did not work last week, but should this week!\nThe openintro R package: houses the dataset we will be working with\n\n\n# Package for functions \nlibrary(tidyverse)\n\n# Package for data\nlibrary(openintro)\n\n\n\n\nThe Bureau of Transportation Statistics (BTS) is a statistical agency that is a part of the Research and Innovative Technology Administration (RITA). As its name implies, BTS collects and makes transportation data available, such as the flights data we will be working with in this lab.\nFirst, we’ll view the nycflights data frame. Run the following code to load in the data:\n\ndata(nycflights)\n\nThe codebook (description of the variables) can be accessed by pulling up the help file by typing a ? before the name of the dataset:\n\n?nycflights\n\nRemember that you can use glimpse() to take a quick peek at your data to understand its contents better.\nQuestion 1\n(a) How large is the nycflights dataset? (i.e. How many rows and columns does it have?)\n(b) Are there numerical variables in the dataset? If so, what are their names?\n\n# You code for exercise 1 goes here! \n\n\n\n\nLet’s start by examining the distribution of departure delays (dep_delay) of all flights with a histogram.\nQuestion 2 – Create a histogram of the dep_delay variable from the nycflights data\n\n# Your code for exercise 2 goes here! \n\nHistograms are generally a very good way to see the shape of a single distribution of numerical data, but that shape can change depending on how the data is split between the different bins.\nYou can easily define the binwidth you want to use, by specifying the binwidth argument inside of geom_histogram(), like so: geom_histogram(binwidth = 15)\nQuestion 3\n(a) Make two other histograms, one with a binwidth of 15 and one with a binwidth of 150.\n\n# Your code for exercise 3 goes here! \n\n\n\n\n(b) How do these three histograms compare? Are features revealed in one that are obscured in another?"
+  },
+  {
+    "objectID": "labs/lab-2.html#sfo-dstinations",
+    "href": "labs/lab-2.html#sfo-dstinations",
+    "title": "Visualizing and Summarizing Numerical Data",
+    "section": "SFO Dstinations",
+    "text": "SFO Dstinations\nOne of the variables refers to the destination (i.e. airport) of the flight, which have three letter abbreviations. For example, flights into Los Angeles have a dest of \"LAX\", flights into San Francisco have a dest of \"SFO\", and flights into Chicago (O’Hare) have a dest of \"ORD\".\nIf you want to visualize only on delays of flights headed to Los Angeles, you need to first filter() the data for flights with that destination (e.g., filter(dest == \"LAX\")) and then make a histogram of the departure delays of only those flights.\nLogical operators: Filtering for certain observations (e.g. flights from a particular airport) is often of interest in data frames where we might want to examine observations with certain characteristics separately from the rest of the data. To do so, you can use the filter() function and a series of logical operators. The most commonly used logical operators for data analysis are as follows:\n\n== means “equal to”\n!= means “not equal to”\n&gt; or &lt; means “greater than” or “less than”\n&gt;= or &lt;= means “greater than or equal to” or “less than or equal to”\n\nQuestion 4 – Fill in the code to create a new dataframe named sfo_flights that is the result of filter()ing only the observations whose destination was San Francisco.\n\n# Fill in the code for exercise 4 here! \n\nsfo_flights &lt;- filter(nycflights, \n                      dest == )\n\n\nMultiple Data Filters\nYou can filter based on multiple criteria! Within the filter() function, each criteria is separated using commas. For example, suppose you are interested in flights leaving from LaGuardia (LGA) in February:\n\n## Remember months are coded as numbers!\nfilter(nycflights, \n       origin == \"LGA\", \n       month == 2)\n\nNote that you can separate the conditions using commas if you want flights that are both leaving from LGA and flights in February. If you are interested in either flights leaving from LGA or flights that happened in February, you can use the | instead of the comma.\nQuestion 5 – Fill in the code below to find the number of flights flying into SFO in July that arrived early. What does the result of this code tell you?\n\n## Fill in the code for exercise 5 here! \n\nfilter(sfo_flights, \n       month == __, \n       arr_delay &gt; __) |&gt; \n  dim()"
+  },
+  {
+    "objectID": "labs/lab-2.html#data-summaries",
+    "href": "labs/lab-2.html#data-summaries",
+    "title": "Visualizing and Summarizing Numerical Data",
+    "section": "Data Summaries",
+    "text": "Data Summaries\nYou can also obtain numerical summaries for the flights headed to SFO, using the summarise() function:\n\nsummarise(sfo_flights, \n          mean_dd   = mean(dep_delay), \n          median_dd = median(dep_delay), \n          n         = n())\n\nNote that in the summarise() function I’ve created a list of three different numerical summaries that I’m interested in.\nThe names of these elements are user defined, like mean_dd, median_dd, n, and you can customize these names as you like (just don’t use spaces in your names!).\nCalculating these summary statistics also requires that you know the summary functions you would like to use.\nSummary statistics: Some useful function calls for summary statistics for a single numerical variable are as follows:\n\nmean(): calculates the average\nmedian(): calculates the median\nsd(): calculates the standard deviation\nvar(): calculates the variances\nIQR(): calculates the inner quartile range (Q3 - Q1)\nmin(): finds the minimum\nmax(): finds the maximum\nn(): reports the sample size\n\nNote that each of these functions takes a single variable as an input and returns a single value as an output."
+  },
+  {
+    "objectID": "labs/lab-2.html#summaries-vs.-visualizations",
+    "href": "labs/lab-2.html#summaries-vs.-visualizations",
+    "title": "Visualizing and Summarizing Numerical Data",
+    "section": "Summaries vs. Visualizations",
+    "text": "Summaries vs. Visualizations\nIf I’m flying from New York to San Francisco, should I expect that my flights will typically arrive on time?\nLet’s think about how you could answer this question. One option is to summarize the data and inspect the output. Another option is to plot the delays and inspect the plots. Let’s try both!\nQuestion 6 – Calculate the following statistics for the arrival delays in the sfo_flights dataset:\n\nmean\nmedian\nmax\nmin\n\n\n## Code for exercise 6 goes here! \n\nQuestion 7 – Using the above summary statistics, what is your answer be to my question? What should I expect if I am flying from New York to San Francisco?\nQuestion 8 – Now, rather than calculating summary statistics, plot the distribution of arrival delays for the sfo_flights dataset.\nChoose the type of plot you believe is appropriate for visualizing the distribution of departure delays.\nDon’t forget to give your visualization informative axis labels!\n\n## Code for exercise 8 goes here! \n\nQuestion 9 – Using the plot above, what is your answer be to my question? What should I expect if I am flying from New York to San Francisco?\nQuestion 10 – How did your answer change when using the plot versus using the summary statistics? i.e. What were you able to see in the plot that could could not “see” with the summary statistics?"
+  },
+  {
+    "objectID": "labs/lab-3.html",
+    "href": "labs/lab-3.html",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "",
+    "text": "In this lab, we will explore and visualize the data using packages housed in the tidyverse suite of packages.\n\n## Package for ggplot and dplyr tools\nlibrary(tidyverse)\n\n## Package for ecological data\nlibrary(lterdatasampler)\n\n## Package for density ridge plots\nlibrary(ggridges)\n\n\n\n\nIn this lab we will work with data from the H.J. Andrews Experimental Forest. The following is a description of the data:\n\nPopulations of West Slope cutthroat trout (Onchorhyncus clarki clarki) in two standard reaches of Mack Creek in the H.J. Andrews Experimental Forest have been monitored since 1987. Monitoring of Pacific Giant Salamanders, Dicamptodon tenebrosus began in 1993. The two standard reaches are in a section of clearcut forest (ca. 1963) and an upstream 500 year old coniferous forest. Sub-reaches are sampled with 2-pass electrofishing, and all captured vertebrates are measured and weighed. Additionally, a set of channel measurements are taken with each sampling. This study constitutes one of the longest continuous records of salmonid populations on record.\n\nFirst, we’ll view the and_vertebrates dataframe where these data are stored.\n\nView(and_vertebrates)\n\n\n\n\nThe codebook (description of the variables) can be accessed by pulling up the help file by typing a ? before the name of the dataset:\n\n?and_vertebrates\n\nQuestion 1 – How large is the and_vertebrates dataset? (i.e. How many rows and columns does the dataset have?)\n\n## Your code for question 1 (and 2) goes here!\n\nQuestion 2 – Are there categorical variables in the dataset? If so, what are their names?\n\n\n\nThe species variable refers to the species of the animal which was captured. You can use the distinct() function to access the distinct values of a categorical variable (e.g., distinct(nycflights, carrier)). Notice the first input is the name of the dataset and the second input is the name of the categorical variable!\nQuestion 3 – Use the distinct() function to discover the levels / values of the species variable.\n\n## Your code for question 3 goes here!"
+  },
+  {
+    "objectID": "labs/lab-3.html#load-packages",
+    "href": "labs/lab-3.html#load-packages",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "",
+    "text": "In this lab, we will explore and visualize the data using packages housed in the tidyverse suite of packages.\n\n## Package for ggplot and dplyr tools\nlibrary(tidyverse)\n\n## Package for ecological data\nlibrary(lterdatasampler)\n\n## Package for density ridge plots\nlibrary(ggridges)"
+  },
+  {
+    "objectID": "labs/lab-3.html#the-data",
+    "href": "labs/lab-3.html#the-data",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "",
+    "text": "In this lab we will work with data from the H.J. Andrews Experimental Forest. The following is a description of the data:\n\nPopulations of West Slope cutthroat trout (Onchorhyncus clarki clarki) in two standard reaches of Mack Creek in the H.J. Andrews Experimental Forest have been monitored since 1987. Monitoring of Pacific Giant Salamanders, Dicamptodon tenebrosus began in 1993. The two standard reaches are in a section of clearcut forest (ca. 1963) and an upstream 500 year old coniferous forest. Sub-reaches are sampled with 2-pass electrofishing, and all captured vertebrates are measured and weighed. Additionally, a set of channel measurements are taken with each sampling. This study constitutes one of the longest continuous records of salmonid populations on record.\n\nFirst, we’ll view the and_vertebrates dataframe where these data are stored.\n\nView(and_vertebrates)"
+  },
+  {
+    "objectID": "labs/lab-3.html#exploring-the-dataset",
+    "href": "labs/lab-3.html#exploring-the-dataset",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "",
+    "text": "The codebook (description of the variables) can be accessed by pulling up the help file by typing a ? before the name of the dataset:\n\n?and_vertebrates\n\nQuestion 1 – How large is the and_vertebrates dataset? (i.e. How many rows and columns does the dataset have?)\n\n## Your code for question 1 (and 2) goes here!\n\nQuestion 2 – Are there categorical variables in the dataset? If so, what are their names?"
+  },
+  {
+    "objectID": "labs/lab-3.html#accessing-the-levels-of-a-variable",
+    "href": "labs/lab-3.html#accessing-the-levels-of-a-variable",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "",
+    "text": "The species variable refers to the species of the animal which was captured. You can use the distinct() function to access the distinct values of a categorical variable (e.g., distinct(nycflights, carrier)). Notice the first input is the name of the dataset and the second input is the name of the categorical variable!\nQuestion 3 – Use the distinct() function to discover the levels / values of the species variable.\n\n## Your code for question 3 goes here!"
+  },
+  {
+    "objectID": "labs/lab-3.html#adding-categorical-variables",
+    "href": "labs/lab-3.html#adding-categorical-variables",
+    "title": "Lab 3: Incorporating Categorical Variables",
+    "section": "Adding Categorical Variables",
+    "text": "Adding Categorical Variables\nWhen we are interested in comparing the distribution of a numerical variable across groups of a categorical variable, we “typically” see people use stacked histograms or side-by-side boxplots. I believe an unsung hero of these types of comparisons is the ridge plot.\nAs introduced in Introduction to Modern Statistics, a ridge plot essentially has multiple density plots stacked in the same plotting window. A key feature of ridge plots is a categorical variable is always on the y-axis, with a numeric variable on the x-axis.\nIn R, we use the geom_density_ridges() function from the ggridges package to create a ridge plot. Yes, this is new, but don’t worry! The function has the same layout as things you’ve seen before.\nQuestion 8 – Fill in the code below to create a ridge plot comparing the lengths of Cutthroat trout between the different types of channels (unittype). Use the trout dataset you filtered above!\nBe sure to add nice axis labels to your plot, which describe the variables being plotted (and their units)!\n\n## Your code for question 8 goes here!\n\nggplot(data = fish, \n       mapping = aes(x = &lt;NUMERICAL VARIABLE&gt;, \n                     y = &lt;CATEGORICAL VARIABLE&gt;)\n       ) +\n  geom_density_ridges() \n\nQuestion 9 – Modify your plot from #8 to incorporate the section of the forest into your plot using either color or facets.\nHint: The fill aesthetic will fill the ridge plots with color.\nQuestion 10 – Based on your plot, how different are the lengths of the Cutthroat trout between the different channel types and forest sections?"
+  },
+  {
+    "objectID": "labs/lab-1.html",
+    "href": "labs/lab-1.html",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "This is a Quarto document!\nQuarto is a software that allows you to interweave text and R code to create HTML, PDF, and Microsoft Word documents\nThere are two ways to view a Quarto document, (1) as the “Source” file, or (2) as the “Visual” file. We will only use the Visual option in this class, as it allows you to interact with Quarto similar to how you interact with Word.\n\n\nSimilar to a Word Doc, there are a variety of ways you can spice up a Quarto document! Let’s explore a few.\nQuestion 1: Using the formatting options, make a numbered list of your top three favorite animals.\nQuestion 2: Using the formatting options, insert an image of your favorite animal.\nQuestion 3: Now, change the “Formatting your Document” section name to the name of your favorite animal. Make sure your header is a level 1 – use the Header 1 formatting option!\n\n\n\nYou can differentiate the R code within a Quarto file from the body of the document, based on the gray boxes that start with an {r}.\nHere is an example of an R code chunk:\nNotice that after the {r} there is a name (packages), that is the name of the code chunk. It is good practice to name your code chunks based on the action they perform. It makes it easier to navigate to them in the navigation pane.\nThis code chunk has three things we want to pay attention to:\n\nThe #| include: false option at the beginning of the code chunk. We use these options to control how the code output looks in our final rendered document.\nThe library(tidyverse) code loads in an R package called the “tidyverse”. This is code you will have in every lab assignment for this class!\nCode comments which are denoted by a ## symbol. Code comments are a way for you (and me) to write what the code is doing, without R thinking what we are writing is code it should execute.\n\n\n\n\nWhen you click the Render button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.\nQuestion 4: Do you see the above code chunk when you knit the document? Why do you think this is the case?\n\n\n\nYou can include code output in your knitted document:\n\nglimpse(mpg)\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…\n\n\nQuestion 5: What do you think the above code does? What type of output does it give you?\nHint: You have saw this type of output earlier today!\n\n\n\n\nYou can also embed plots in the rendered document.\nHere is an example of a plot.\n\n\n\n\n\nQuestion 6: What do you think the echo: false option does in the above code chunk?\nQuestion 7: What do you think the mapping = aes(y = manufacturer, x = hwy)) code does?\nQuestion 8: What do you think the labs(x = \"Highway Miles Per Gallon\", y = \"Car Manufacturer\") code does?"
+  },
+  {
+    "objectID": "labs/lab-1.html#formatting-your-document",
+    "href": "labs/lab-1.html#formatting-your-document",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "Similar to a Word Doc, there are a variety of ways you can spice up a Quarto document! Let’s explore a few.\nQuestion 1: Using the formatting options, make a numbered list of your top three favorite animals.\nQuestion 2: Using the formatting options, insert an image of your favorite animal.\nQuestion 3: Now, change the “Formatting your Document” section name to the name of your favorite animal. Make sure your header is a level 1 – use the Header 1 formatting option!"
+  },
+  {
+    "objectID": "labs/lab-1.html#r-code",
+    "href": "labs/lab-1.html#r-code",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "You can differentiate the R code within a Quarto file from the body of the document, based on the gray boxes that start with an {r}.\nHere is an example of an R code chunk:\nNotice that after the {r} there is a name (packages), that is the name of the code chunk. It is good practice to name your code chunks based on the action they perform. It makes it easier to navigate to them in the navigation pane.\nThis code chunk has three things we want to pay attention to:\n\nThe #| include: false option at the beginning of the code chunk. We use these options to control how the code output looks in our final rendered document.\nThe library(tidyverse) code loads in an R package called the “tidyverse”. This is code you will have in every lab assignment for this class!\nCode comments which are denoted by a ## symbol. Code comments are a way for you (and me) to write what the code is doing, without R thinking what we are writing is code it should execute."
+  },
+  {
+    "objectID": "labs/lab-1.html#rendering",
+    "href": "labs/lab-1.html#rendering",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "When you click the Render button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.\nQuestion 4: Do you see the above code chunk when you knit the document? Why do you think this is the case?"
+  },
+  {
+    "objectID": "labs/lab-1.html#including-code-output",
+    "href": "labs/lab-1.html#including-code-output",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "You can include code output in your knitted document:\n\nglimpse(mpg)\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…\n\n\nQuestion 5: What do you think the above code does? What type of output does it give you?\nHint: You have saw this type of output earlier today!"
+  },
+  {
+    "objectID": "labs/lab-1.html#including-plots",
+    "href": "labs/lab-1.html#including-plots",
+    "title": "Welcome to Posit Cloud!",
+    "section": "",
+    "text": "You can also embed plots in the rendered document.\nHere is an example of a plot.\n\n\n\n\n\nQuestion 6: What do you think the echo: false option does in the above code chunk?\nQuestion 7: What do you think the mapping = aes(y = manufacturer, x = hwy)) code does?\nQuestion 8: What do you think the labs(x = \"Highway Miles Per Gallon\", y = \"Car Manufacturer\") code does?"
+  },
+  {
+    "objectID": "labs/lab-4.html",
+    "href": "labs/lab-4.html",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(lterdatasampler)"
+  },
+  {
+    "objectID": "labs/lab-4.html#old-packages",
+    "href": "labs/lab-4.html#old-packages",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(lterdatasampler)"
+  },
+  {
+    "objectID": "labs/lab-4.html#new-package",
+    "href": "labs/lab-4.html#new-package",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "New Package!",
+    "text": "New Package!\n\nlibrary(moderndive)"
+  },
+  {
+    "objectID": "labs/lab-4.html#data-for-today",
+    "href": "labs/lab-4.html#data-for-today",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "Data for Today",
+    "text": "Data for Today\nToday we’ll be working with data on lake ice duration for two lakes surrounding Madison, Wisconsin. This dataset contains information on the number of days of ice (ice duration) on each lake for years between 1851 and 2019. These data are stored in the ntl_icecover dataset, which lives in the lterdatsampler package.\nAccording to the EPA, lake ice duration can be an indicator of climate change. This is because lake ice is dependent on several environmental factors, so changes in these factors will influence the formation of ice on top of lakes. As a result, the study and analysis of lake ice formation can inform scientists about how quickly the climate is changing, and are critical to minimizing disruptions to lake ecosystems."
+  },
+  {
+    "objectID": "labs/lab-4.html#inspecting-the-data",
+    "href": "labs/lab-4.html#inspecting-the-data",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "Inspecting the Data",
+    "text": "Inspecting the Data\nQuestion 1 – How large is the ntl_icecover dataset? (i.e. How many rows and columns does it have?)\n\n# Code to answer question 1 goes here!"
+  },
+  {
+    "objectID": "labs/lab-4.html#visualize-a-simple-linear-regression",
+    "href": "labs/lab-4.html#visualize-a-simple-linear-regression",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "Visualize a Simple Linear Regression",
+    "text": "Visualize a Simple Linear Regression\nLet’s start with tools to visualize and summarize linear regression.\n\nTools\n\nVisualize the relationship between x & y – geom_point()\nVisualize the linear regression line – geom_smooth()\n\nWe will be investigating the relationship between the ice_duration of each lake and the year.\n\n\nStep 1\nQuestion 2 – Make a scatterplot of the relationship between the ice_duration (response) and the year (explanatory).\nBe sure to make the axis labels look nice, including any necessary units!\n\n# Code to answer question 2 goes here!\n\nQuestion 3 – Describe the relationship you see in the scatterplot. Be sure to address the four aspects we discussed in class: form, direction, strength, and unusual points.\nHint: You need to explicitly state where the unusual observations are!\n\n\nStep 2\nTo add a regression line on top of a scatterplot, you add (+) a geom_smooth() layer to your plot. However, if you add a “plain” geom_smooth() to the plot, it uses a wiggly line. You need to tell geom_smooth() what type of smoother line you want for it to use! We can get a straight line by including method = \"lm\" inside of geom_smooth().\nQuestion 4 – Add a linear regression line to the scatterplot you made in Question 3.\nNo code goes here, you need to modify your scatterplot from Question 3!"
+  },
+  {
+    "objectID": "labs/lab-4.html#fit-a-simple-linear-regression-model",
+    "href": "labs/lab-4.html#fit-a-simple-linear-regression-model",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "Fit a Simple Linear Regression Model",
+    "text": "Fit a Simple Linear Regression Model\nNext, we are going to summarize the relationship between ice_duration and year with a linear regression equation.\n\nTools\n\nCalculate the correlation between x & y – get_correlation()\nModel the relationship between x & y – lm()\nExplore coefficient estimates – get_regression_table()\n\n\n\nStep 1\nQuestion 5 – Calculate the correlation between these variables, using the get_correlation() function.\n\n# Code to answer question 5 goes here!\n\n\n\nStep 2\nNext, we will “fit” a linear regression with the lm() function. Remember, the “formula” for lm() is response_variable ~ explanatory_variable. Also recall that you need to tell lm() where the data live using data =!\nQuestion 6 – Fit a linear regression modeling the relationship between between ice_duration and year. Save your linear regression into an object named ice_lm (using the &lt;- assignment arrow) so you can use it later.\nRemember what order you need to put the response and explanatory variables!\n\n# Code to answer question 6 goes here!\n\n\n\nStep 3\nFinally, to get the regression equation, we need grab the coefficients out of the linear model object you made in Step 2. The get_regression_table() function is a handy tool to do just that!\nQuestion 7 – Use the get_regression_table() function to obtain the coefficient estimates for the ice_lm regression you fit in Question 6.\n\n# Code to answer question 7 goes here!\n\nQuestion 8 – Using the coefficient estimates above, write out the estimated regression equation.\nYour equation needs to be in the context of the variables, not in generic \\(x\\) and \\(y\\) statements!\nQuestion 9 – Interpret the value of the slope coefficient.\nYour interpretation needs to be in the context of the variables, not in generic \\(x\\) and \\(y\\) statements!\nQuestion 10 – What do you expect to happen to the duration of ice if the number of years is increased by 100?"
+  },
+  {
+    "objectID": "labs/lab-4.html#a-preview-of-whats-to-come",
+    "href": "labs/lab-4.html#a-preview-of-whats-to-come",
+    "title": "Lab 4: Simple Linear Regression",
+    "section": "A preview of what’s to come",
+    "text": "A preview of what’s to come\nIn our analysis above, we only looked at the relationship between ice duration and year, not accounting for which lake the duration was for. That is another explanatory variable we could include in our regression model!\nQuestion 11 – Using the code you wrote for Question 2 (with the regression line added), add a color for the name of the lake (lakeid).\n\n# Code to answer question 11 goes here!"
+  },
+  {
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "weeks/week-1.html",
+    "href": "weeks/week-1.html",
+    "title": "Week One: Foundations of Statistics",
+    "section": "",
+    "text": "Welcome!\nIn this coursework, you’ll get a refresher on the foundational components of statistics and data, investigate how statistics is used in your major, and think critically about the philosophy of statistical inference."
+  },
+  {
+    "objectID": "weeks/week-1.html#learning-outcomes",
+    "href": "weeks/week-1.html#learning-outcomes",
+    "title": "Week One: Foundations of Statistics",
+    "section": "0.1 Learning Outcomes",
+    "text": "0.1 Learning Outcomes\nBy the end of this coursework you should be able to:\n\ndescribe observations, variables, and data matrices\nexplain the different types of variables a study can have\nillustrate the difference between explanatory and response variables\ndelineate the difference between a population and a sample\ncompare and contrast different sampling methods\noutline what is necessary to make an experiment an “experiment”\ncharacterize the differences between observational studies and experiments\ndescribe the difference between little “s” statistics and big “S” Statistics\noutline what “dichotomous thinking” is\nillustrate how dichotomous thinking is used in Statistics\nexplain issues with using the term “significant” in Statistics"
+  },
+  {
+    "objectID": "weeks/week-1.html#textbook-reading",
+    "href": "weeks/week-1.html#textbook-reading",
+    "title": "Week One: Foundations of Statistics",
+    "section": "1.1 Textbook Reading",
+    "text": "1.1 Textbook Reading\n📖 Required Reading: Introduction to Modern Statistics – Hello Data\n📖 Required Reading: Introduction to Modern Statistics – Study Design\n\n1.1.1 Reading Guide – Due Tuesday by noon\nDownload the Word Document\nNote: There is one combined reading guide for both chapters.\n\n\n\n\n\n\nSubmission\n\n\n\nSubmit your completed reading guide to the Canvas assignment portal!"
+  },
+  {
+    "objectID": "weeks/week-1.html#concept-quiz-due-tuesday-by-noon",
+    "href": "weeks/week-1.html#concept-quiz-due-tuesday-by-noon",
+    "title": "Week One: Foundations of Statistics",
+    "section": "1.2 Concept Quiz – Due Tuesday by noon",
+    "text": "1.2 Concept Quiz – Due Tuesday by noon\n1. What are the different types of variables that can appear in a dataset? Select all that apply!\n\ndiscrete numerical\nordinal categorical\nnominal categorical\ncontinuous numerical\ndiscrete categorical\n\n2. Just because a variable has numeric values, does not mean it is a numeric variable. Which of the following variables appear numerical but behave like a categorical variable? Select all that apply!\n\nzip code\nGPA\nheight\nyear in school\n\n3. Which of the following statements are true about observational studies and experiments? Select all that apply!\n\nExperiments randomly assign the explanatory variable\nObservational studies randomly assign the explanatory variable\nObservational studies can make causal statements about the relationship between the explanatory and response variables\nExperiments can make causal statements about the relationship between the explanatory and response variables\n\n4. What are different methods for sampling from a population? Select all that apply!\n\nsimple random sampling\nstratified random sampling\ncluster sampling\nmultistage sampling\nconvenience sampling\n\n5. Cluster sampling and stratified sampling both rely on grouping observations, but have important differences. Match each method to how observations are randomly sampled.\n\n\nstratified sampling\ncluster sampling\n\ngroups of observations are created, groups are randomly selected, every observation in the selected group is sampled\ngroups of observations are created, observations within a group are randomly sampled"
+  },
+  {
+    "objectID": "weeks/week-1.html#statistical-critique-step-0-due-friday-by-5pm",
+    "href": "weeks/week-1.html#statistical-critique-step-0-due-friday-by-5pm",
+    "title": "Week One: Foundations of Statistics",
+    "section": "3.1 Statistical Critique Step 0 – Due Friday by 5pm",
+    "text": "3.1 Statistical Critique Step 0 – Due Friday by 5pm\nUpload a PDF of your journal article to the Canvas assignment portal."
+  },
+  {
+    "objectID": "course_resources.html",
+    "href": "course_resources.html",
+    "title": "R Resources",
+    "section": "",
+    "text": "Tip\n\n\n\nClick on the link related to a specific week to explore R skills learned that week!\n\n\n\nWeekly R Resources\n\nWeek 2 – Exploring Numerical Variables\n\n\nWeek 3 – Incorporating Categorical Variables\n\n\nWeek 4 – Simple Linear Regression"
+  },
+  {
+    "objectID": "computing-access.html",
+    "href": "computing-access.html",
+    "title": "Computing access",
+    "section": "",
+    "text": "This course uses Posit Cloud for lab assignments and projects. There is a link to join the STAT 313 Posit Cloud Workspace at the bottom of the Week 1 Module on Canvas.\nIf you have worked with R & RStudio before, I do not want you using the local installation of RStudio to work on your Labs / Projects. I cannot help you on your code if things go sideways! If you use Posit Cloud, however, I can “peek in” to your project and help you debug your code. :)"
+  },
+  {
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "",
+    "text": "A deep dive into linear models for analyzing multivariate data sets. In this course, you will learn techniques for checking the appropriateness of proposed models, such as residual analyses and case influence diagnostics, and techniques for selecting models. Gain experience dealing with the challenges that arise in practice through assignments that utilize real-world data. This class emphasizes data analysis over mathematical theory."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "",
+    "text": "This page contains an outline of the topics, content, and assignments for the quarter. Note that this schedule will be updated as the quarter progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nLecture Slides\nActivity\nLab\nCritique\nProject\n\n\n\n\n0\nSun, April 2\nWelcome to Stat 313 Course Set-up\n📖\n\n\n\n\n\n\n\n1\nTue, April 4\nCourse Structure & Statistics Review\n📖\n🖥\n\n\n\n\n\n\n\nThu, April 6\nIntroduction to Data\n\n🖥\n\n💻\n\n\n\n\n\nSun, April 9\nLab 1 Due\n\n\n\n💻  🗝"
+  },
+  {
+    "objectID": "course-team.html",
+    "href": "course-team.html",
+    "title": "Course Instructor",
+    "section": "",
+    "text": "Dr. Allison Theobold (she / they) is an Assistant Professor of Statistics at Cal Poly in beautiful San Luis Obispo, California. Allison received her doctorate in Statistics, with an emphasis in Statistics Education, from Montana State University. Allison’s work focuses on innovation in statistics and data science education, with an emphasis on equitable pedagogy and learning trajectories. Allison is also interested in exploring pedagogical approaches for enhancing retention of under-represented students in STEM, including creating inclusive discoursive spaces and equitable group collaborations."
+  },
+  {
+    "objectID": "slides/week1-day2.html#section",
+    "href": "slides/week1-day2.html#section",
+    "title": "Working with Data",
+    "section": "",
+    "text": "There’s Data\n\n\nGender stereotypes in 5-7 year old children\n\n\n\n\n\n\n\n\nsubject\nsex\nage\ntrait\ntarget\nstereotype\nhigh_achieve_caution\n\n\n\n\n64\nmale\n7\nnice\nadults\n0.25\n0.50\n\n\n107\nmale\n7\nsmart\nchildren\n0.25\n0.50\n\n\n23\nmale\n6\nnice\nadults\n0.75\n0.75\n\n\n65\nmale\n7\nsmart\nadults\n0.00\n0.75\n\n\n47\nfemale\n7\nnice\nadults\n1.00\n0.50\n\n\n59\nmale\n7\nnice\nadults\n0.25\n0.75"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-1",
+    "href": "slides/week1-day2.html#section-1",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Lots of Data\n\nBody girth measurements and skeletal diameter measurements for 247 men and 260 women.\n\n\n\n\n\n\nage\nwgt\nhgt\nsex\nsho_gi\nwai_gi\nnav_gi\nhip_gi\n\n\n\n\n30\n93.8\n192.7\n1\n112.2\n88.3\n93.5\n105.0\n\n\n44\n87.7\n177.8\n1\n120.4\n98.0\n101.8\n101.5\n\n\n55\n87.3\n179.1\n1\n122.4\n98.0\n98.0\n99.6\n\n\n24\n74.5\n182.4\n1\n115.0\n76.8\n80.0\n94.5\n\n\n37\n52.7\n156.0\n0\n97.4\n69.0\n76.3\n86.7\n\n\n20\n69.0\n168.9\n0\n104.5\n75.0\n95.0\n104.9"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-2",
+    "href": "slides/week1-day2.html#section-2",
+    "title": "Working with Data",
+    "section": "",
+    "text": "In Every Context\n\n\nNBA player of the week from 1985 to 2016\n\n\n\n\n\n\n\n\nAge\nDate\nDraft Year\nHeight\nPlayer\nPosition\n\n\n\n\n24\nJan 12, 2015\n2011\n6-1\nKemba Walker\nG\n\n\n26\nFeb 26, 1989\n1985\n7-0\nPatrick Ewing\nC\n\n\n26\nNov 4, 1984\n1981\n6-10\nLarry Nance\nPF\n\n\n24\nDec 3, 2012\n2007\n6-9\nKevin Durant\nSF\n\n\n31\nMar 27, 1994\n1984\n7-0\nKevin Willis\nC\n\n\n24\nNov 12, 1995\n1993\n6-7\nPenny Hardaway\nPG"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-3",
+    "href": "slides/week1-day2.html#section-3",
+    "title": "Working with Data",
+    "section": "",
+    "text": "You Can Imagine\n\n\nFish Sampled on Blackfoot River\n\n\n\n\n\n\n\n\ntrip\nmark\nlength\nweight\nyear\nsection\nspecies\n\n\n\n\n1\n0\n422\n640\n2004\nScottyBrown\nRBT\n\n\n2\n1\n391\nNA\n1998\nScottyBrown\nWCT\n\n\n1\n0\n275\n220\n2004\nJohnsrud\nRBT\n\n\n1\n0\n220\n90\n2002\nJohnsrud\nBrown\n\n\n1\n0\n374\n360\n1989\nScottyBrown\nRBT\n\n\n1\n0\n219\n100\n1990\nJohnsrud\nRBT"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-4",
+    "href": "slides/week1-day2.html#section-4",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Your Turn\n\n\nEvery year, the US releases to the public a large data set containing information on births recorded in the country.\nA total of 13 variables were collected on every birth, including information about:\n\nthe birth (baby weight, sex of baby, premie status)\nthe pregnancy (hospital visits, length of gestation, )\nthe mother’s attributes (age, smoking status, marital status, race)\nthe father’s age\n\n\n\n\nHow would you expect this dataframe to look?"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-5",
+    "href": "slides/week1-day2.html#section-5",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Types of Variables\n\n\n\nDiagram of types of variables we will analyze!"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-6",
+    "href": "slides/week1-day2.html#section-6",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Examples\n\n\nA person’s height (usually) would be a continuous, numerical variable\nThe number of classes someone takes would be a discrete, numerical variable\nA course letter grade would be a ordinal, categorical variable\nThe color of someone’s hair would be a regular, categorical variable"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-7",
+    "href": "slides/week1-day2.html#section-7",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Your Turn\n\n\nSuppose researchers have yearly data on Elephant Seal abundance on Pedras Blancas from 2010 - 2014.\n\n\n\nWhat type of variable would year be?"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-8",
+    "href": "slides/week1-day2.html#section-8",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Types of Studies\n\n\n\nExperiment\n\nrandomization\nreplication\ncontrolling\nblocking\n\n\n\n\nObservational Study\n\ncollect data in a way that does not directly interfere with how the data arise"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-9",
+    "href": "slides/week1-day2.html#section-9",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Relationships Between Variables\n\n\nexplanatory variable \\(\\rightarrow\\) might affect \\(\\rightarrow\\) response variable\n\n\nIf two variables are not associated, then they are said to be independent.\nIf two variables are associated, then they are said to be dependent."
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-10",
+    "href": "slides/week1-day2.html#section-10",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Causal Inference\n\n\nassociation \\(\\neq\\) causation\n\n\nWhat do you need to say that the explanatory variable causes a change in the response variable?"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-11",
+    "href": "slides/week1-day2.html#section-11",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Lab Warm-up"
+  },
+  {
+    "objectID": "slides/week1-day2.html#section-12",
+    "href": "slides/week1-day2.html#section-12",
+    "title": "Working with Data",
+    "section": "",
+    "text": "Data Types in R\n\n\n\nglimpse(births_small)\n\nRows: 1,000\nColumns: 10\n$ fage           &lt;int&gt; 34, 36, 37, NA, 32, 32, 37, 29, 30, 29, 30, 34, 28, 28,…\n$ mage           &lt;dbl&gt; 34, 31, 36, 16, 31, 26, 36, 24, 32, 26, 34, 27, 22, 31,…\n$ weeks          &lt;dbl&gt; 37, 41, 37, 38, 36, 39, 36, 40, 39, 39, 42, 40, 40, 39,…\n$ premie         &lt;chr&gt; \"full term\", \"full term\", \"full term\", \"full term\", \"pr…\n$ gained         &lt;dbl&gt; 28, 41, 28, 29, 48, 45, 20, 65, 25, 22, 40, 30, 31, NA,…\n$ weight         &lt;dbl&gt; 6.96, 8.86, 7.51, 6.19, 6.75, 6.69, 6.13, 6.74, 8.94, 9…\n$ lowbirthweight &lt;chr&gt; \"not low\", \"not low\", \"not low\", \"not low\", \"not low\", …\n$ sex            &lt;fct&gt; male, female, female, male, female, female, female, mal…\n$ habit          &lt;chr&gt; \"nonsmoker\", \"nonsmoker\", \"nonsmoker\", \"nonsmoker\", \"no…\n$ whitemom       &lt;chr&gt; \"white\", \"white\", \"not white\", \"white\", \"white\", \"white…\n\n\n\n\n\nWhat do you think dbl means?\nHow is that different from int?\n\n\n\nWhat does chr mean?\nHow might it differ from fct?"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section",
+    "href": "slides/week1-day1.html#section",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "About Me…\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPh.D. in Statistics from Montana State University\nB.S. in Mathematics & B.B.A. in Economics\nfrom Colorado Mesa University"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-1",
+    "href": "slides/week1-day1.html#section-1",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "What is Statistics?\n\n\n\nScientists seek to answer questions using rigorous methods and careful observations. These observations – collected from the likes of field notes, surveys, and experiments – form the backbone of a statistical investigation and are called data.\n\n\nStatistics is the study of how best to collect, analyze, and draw conclusions from data.\n\n\nIntroduction to Modern Statistics"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-2",
+    "href": "slides/week1-day1.html#section-2",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "What Statistics Is To Me\n\n \n\n\n\n\nThe data science cycle – Wickham & Grolemund"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-3",
+    "href": "slides/week1-day1.html#section-3",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "What you can expect in STAT 313\n\nThis course will teach you the fundamentals of linear models—simple linear regression, multiple linear regression, and analysis of variance—and experimental design. You will extend the concepts covered in your Stat I course, to:\n\n\nwork with data in a reproducible way (using R)\nvisualize and summarize a variety of datasets (in R)\ncritically evaluate the use of Statistics\nperform statistical analyses to answer research questions (using R)"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-4",
+    "href": "slides/week1-day1.html#section-4",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Coding 🙀\n\n\nCoding is a huge part of how doing statistics in the wild looks.\n\n\n\nEveryone is coming from a different background\nDifferent aspects of the course will be difficult to different people\nYou will be given coding resources each week\nUse your peers to support your learning"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-5",
+    "href": "slides/week1-day1.html#section-5",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Course Components\n\n\n\n\nBefore Class\n\n\nReading Guides\nConcept Quizzes\nR Tutorials\n\n\n\n\n\nDuring Class\n\n\nGroup Discussion\nHands-on Activities\nLab Assignments\n\n\n\n\n\nOutside of Class\n\n\nStatistical Critiques\nMidterm Project\nFinal Project"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-6",
+    "href": "slides/week1-day1.html#section-6",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Specifications Based Grading\n\n\n\n\nEveryone is capable of earning an A!"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-7",
+    "href": "slides/week1-day1.html#section-7",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "How Smart are You?\n\n\n\n(1 minute)\n\nWrite two criteria would you use to rank yourself compared to everyone else in this class\n\n\n\n\n(3 minutes)\n\nTalk with the person on your right about the criteria you proposed\n\n\n\n\n(3 minutes)\n\nShare out\nPerson with most vowels in name should be prepared to share!"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-8",
+    "href": "slides/week1-day1.html#section-8",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Cooperative Learning\n\nis a structured form of small-group learning\n\n\n\n\nRoles relate to how the work should be done\n\nRoles are not about breaking up the work intellectually\n\nRoles allow each person to contribute to the group in significant ways\n\nEach person’s participation is necessary to complete the task"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-9",
+    "href": "slides/week1-day1.html#section-9",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Group Norms\n\n\n\n\nZero tolerance for: racism, sexism, homophobia, transphobia, ageism, ableism\nRespect one another\nIntent and impact both matter\n\n\n\n\n\nNon-judgmental\nTake space, make space – Share the air (page)\nEmbrace discomfort\nMake decisions by consensus"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-10",
+    "href": "slides/week1-day1.html#section-10",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "How We Learn Together\n\n\n\n\n\nNo one is done until everyone is done\nYou have the right to ask anyone in your group for help\nYou have the duty to help anyone in your group who asks for help\n\n\n\n\n\n\n\nHelping someone means explaining your thinking not giving answers or doing the work for them\nProvide a justification when you make a statement\nThink and work together – don’t divide up the work"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-11",
+    "href": "slides/week1-day1.html#section-11",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Break"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-12",
+    "href": "slides/week1-day1.html#section-12",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Warm-up\n\n\nSketch out what you recall the scientific method / process looking like.\n\n\n\nWhere does statistics happen?"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-13",
+    "href": "slides/week1-day1.html#section-13",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Why?"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-14",
+    "href": "slides/week1-day1.html#section-14",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "For a scientific study, what is the purpose of a statistical analysis?\n\n\n\n\nWhat does it mean for an analysis to be “objective”?"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-15",
+    "href": "slides/week1-day1.html#section-15",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "Dichotomous thinking\n\n\n(90 seconds)\nWhat is an example of a dichotomous choice?\n\n \n(90 seconds)\nHow is dichotomous thinking used in Statistics?"
+  },
+  {
+    "objectID": "slides/week1-day1.html#section-16",
+    "href": "slides/week1-day1.html#section-16",
+    "title": "Welcome to Stat 313!",
+    "section": "",
+    "text": "The S-word\n\n\n(60 seconds)\nWhat are 2-3 synonyms of “significant” that come to your mind?\n\n(90 seconds)\nWhat is one issue you see with using the term “significant” to denote “small” p-values?"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "project/midterm-proposal.html",
+    "href": "project/midterm-proposal.html",
+    "title": "Midterm Project Proposal",
+    "section": "",
+    "text": "This week you will get started on your midterm project by selecting what dataset you wish to analyze and writing an introduction about the dataset you chose."
+  },
+  {
+    "objectID": "project/midterm-proposal.html#option-1-use-your-own-data",
+    "href": "project/midterm-proposal.html#option-1-use-your-own-data",
+    "title": "Midterm Project Proposal",
+    "section": "1.1 Option 1 – Use your own data",
+    "text": "1.1 Option 1 – Use your own data\nIf you have a dataset from another course or your own research which you believe can be appropriately modeled with a linear regression, you can propose to use these data.\n\nDeliverable\nFor the Midterm Project Proposal assignment on Canvas, you are required to state at the beginning of the document, that you have chosen to use your own dataset. You are also required to submit your dataset as either an Excel file (.csv or .xlsx)."
+  },
+  {
+    "objectID": "project/midterm-proposal.html#option-2-use-a-public-dataset",
+    "href": "project/midterm-proposal.html#option-2-use-a-public-dataset",
+    "title": "Midterm Project Proposal",
+    "section": "1.2 Option 2 – Use a public dataset",
+    "text": "1.2 Option 2 – Use a public dataset\nI’ve compiled a list of datasets from a variety of contexts, all which are relatively tidy and ready for analysis.\nFrom the lterdatasampler package:\n\nand_vertebrates: Size data for Cutthroat trout and salamanders in different sections of forest (from Lab 3).\nntl_icecover: Data on duration of ice cover of lakes in the Madison, WI area (from Lab 4).\nhbr_maples: Data on the growth of Sugar Maple (Acer saccharum) seedlings in response to calcium addition.\npie_crab: Data on Fiddler crab body size in salt marshes from Florida to Massachusetts.\n\nFrom the openintro package:\n\nncbirths: Data from North Carolina births in 2004 (from Week 4).\npossum: Data representing possums in Australia and New Guinea.\n\nFrom the moderndive package:\n\nevals: Data from end of semester student evaluations from University of Texas at Austin (discussed in ModernDive textbook).\n\nFrom the gapminder package:\n\ngapminder: Data on life expectancy, GDP per capita, and population by country (discussed in ModernDive textbook).\n\n\nDeliverable\nFor the Midterm Project Proposal assignment on Canvas, you are required to state at the beginning of the document, the name of the dataset you have chosen to use."
+  },
+  {
+    "objectID": "project/midterm-proposal.html#if-you-chose-to-use-your-own-data",
+    "href": "project/midterm-proposal.html#if-you-chose-to-use-your-own-data",
+    "title": "Midterm Project Proposal",
+    "section": "2.1 If you chose to use your own data",
+    "text": "2.1 If you chose to use your own data\nStep 1: Describe the context of your dataset in your own words! How were the data collected? Was there a study these data came from?\nI don’t know anything about your data, so I expect for this description to be extensive. If the data you are using are from a class, you are responsible for obtaining the context of the data–you cannot simply say “These were data used in BIO 253.”\nStep 2: Choose your variables\nDescribe at least three variables you are interested in. Choose one variable for the response and at least two explanatory variables."
+  },
+  {
+    "objectID": "project/midterm-proposal.html#if-you-chose-a-dataset-from-the-list-above",
+    "href": "project/midterm-proposal.html#if-you-chose-a-dataset-from-the-list-above",
+    "title": "Midterm Project Proposal",
+    "section": "2.2 If you chose a dataset from the list above",
+    "text": "2.2 If you chose a dataset from the list above\nStep 1: Describe the context of your dataset in your own words! How were the data collected? Was there a study these data came from?\n\n\n\n\n\n\nTip\n\n\n\nTo obtain information on the dataset, click on the link provided in its name!\n\n\nStep 2: Choose your variables\nDescribe at least three variables you are interested in. Choose one variable for the response and at least two explanatory variables."
+  },
+  {
+    "objectID": "project/midterm-project-directions.html",
+    "href": "project/midterm-project-directions.html",
+    "title": "Midterm Project Guidelines",
+    "section": "",
+    "text": "Your Task\nFor this project, you are expected to use a multiple linear regression to investigate the relationship between the variables you outlined in your Midterm Project Proposal. Your project is required to have at least two explanatory variables, one of which must be numerical. You are expected to justify why you chose each explanatory variable in the Introduction section of your report.\n\n\nIntroduction\n\nIn 4-6 sentences describe how the data were collected, the context of the data (e.g., Are they from a study or a publication?), and the background of the research problem (e.g., What question do these data address? Why were the data collected?)\n\n\n\n\n\n\n\nTip\n\n\n\nYou may need to look up the publication(s) the data are associated with to obtain information on how they were collected.\n\n\n\nState the question(s) of interest you will address with your statistical analysis. The more specific you define the question of interest here, the easier the rest of the analysis and report will be. The research questions should start with, “What is the relationship between…” and should be as specific as possible. Your Findings section should directly address the question(s) you pose here.\n\n\n\nMethods\nThis section should lay out the steps, decisions, and logic leading to the statistical model you will use to answer the research question of interest.\n\nDescribe the response and explanatory variables, how they were measured and their associated units. For categorical variables, describe the levels of the categorical variable.\nProduce data visualizations exploring the relationship(s) you are interested in investigating, contrasting the need for a second explanatory variable.\n\nFor a multiple linear regression with one numerical variable and one categorical variable, you should produce two visualizations: one with different slopes and one with parallel slopes.\nFor a multiple linear regression with two numerical variables, you should produce three visualizations: one with both explanatory variables included, and two with each explanatory variable on its own.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nEvery visualization should have nicely formatted axis labels!\n\n\n\nDescribe what you see in the visualizations, making direct references to the plots!\nOutline the appropriate statistical model you will use to answer the question(s) of interest that you stated previously. Be specific about why the method being used are appropriate for the investigation at hand making direct reference to the visualizations.\n\n\n\n\n\n\nFindings\nIn this section you will write up your findings for each research question of interest.\n\nFit the statistical model stated at the end of the Methods section\nObtain the coefficients for the model\n\n\n\n\n\n\n\nTip\n\n\n\nUse the get_regression_table() function from the moderndive package to provide nicely formatted output from your regression model.\n\n\n\nWrite out the estimated regression equation for your statistical model.\n\nIf your regression contains categorical variables, you can either write your equation out with indicator variables or write out a different equation for each group.\n\nInterpret in the context of the data the coefficients from the regression equation.\nBased on your visualizations and the regression model, what is your conclusion for the questions of interest?\n\n\n\n\n\n\n\nCaution\n\n\n\nThere should be no mention of p-values in your conclusion!\n\n\n\n\nScope of Inference\nWrite a 3-4 sentence statement on what can be inferred from the design of the study and the results of your statistical analysis. Specifically, answer these two questions and comment on their implications:\n\nBased on the sampling method used, what larger population can you infer the results or your analysis onto?\nBased on the design of the study, what type of statements can be made about the relationship between the explanatory and response variables. Specifically, can cause-and-effect statements be made?"
+  },
+  {
+    "objectID": "course-support.html",
+    "href": "course-support.html",
+    "title": "Course support",
+    "section": "",
+    "text": "Most of you will need help at some point and we want to make sure you can identify when that is without getting too frustrated and feel comfortable seeking help."
+  },
+  {
+    "objectID": "course-support.html#lectures-and-labs",
+    "href": "course-support.html#lectures-and-labs",
+    "title": "Course support",
+    "section": "Lectures and labs",
+    "text": "Lectures and labs\nIf you have a question during lecture or lab, feel free to ask it! There are likely other students with the same question, so by asking you will create a learning opportunity for everyone."
+  },
+  {
+    "objectID": "course-support.html#student-hours",
+    "href": "course-support.html#student-hours",
+    "title": "Course support",
+    "section": "Student Hours",
+    "text": "Student Hours\n\n\n\nDay\nTime\n\n\n\n\nTuesdays\n10:10 pm – 11:00 am (in-person)\n\n\nWednesdays\n2:10 pm - 3:00 pm (individual appointments)\n\n\nThursdays\n10:10 am – 11:00 am (in-person)\n\n\n\nA lot of questions are most effectively answered in-person, and student hours are the best place to come ask me questions! I encourage each and every one of you to take advantage of this resource! Make a pledge to stop by office hours at least once during the first three weeks of class. If you truly have no questions to ask, just stop by and say hi and introduce yourself.\n\nPersonal Meetings\nIf you would like to talk with me individually, I’ve reserved time on Wednesdays from 2:10pm to 3:00pm for individual appointments. You can make appointments through the following link: https://calendly.com/allisontheobold\nI do request that you make appointments at least 1-hour ahead of time, so I don’t miss our meeting!\nIf you need to meet, but none of the student hours work for you please let me know! It is possible we can communicate asynchronously through Discord or email, but I am happy to schedule a meeting during another time if necessary."
+  },
+  {
+    "objectID": "course-support.html#discord",
+    "href": "course-support.html#discord",
+    "title": "Course support",
+    "section": "Discord",
+    "text": "Discord\nWe will use Discord to manage questions and responses regarding course content. There are channels for the different components of each week (e.g., Week 1 Lab Assignment). Please do not send an email about homework questions or questions about the course material. It is incredibly helpful for others in the course to see the questions you have and the responses to those questions. I will try to answer any questions posted to Discord within 3-4 hours (unless it is posted at midnight). If you think you can answer another student’s question, please respond!"
+  },
+  {
+    "objectID": "course-support.html#email",
+    "href": "course-support.html#email",
+    "title": "Course support",
+    "section": "Email",
+    "text": "Email\nPlease refrain from emailing any course content questions (those should be posted to Discord), and only use email for questions about personal matters that may not be appropriate for the public course forum (e.g., illness, accommodations, etc.). For such matters, you may email Dr. Allison Theobold at atheobol@calpoly.edu.\nI do my best to reply to emails promptly and helpfully. However, I receive a lot of emails. To help both you and me, here are some specific expectations about emails:\n\nPlease tell me what course and section (by time or number) you are in!\nIf you email me between 9am and 4pm on Monday through Friday, I’ll try my best to reply to you on the same day.\nIf you email me outside of those hours, I will do my best to respond to you by the next working day. For my own mental health, I do not work on weekends. Thus, if you send an email after 4pm on Friday or during the weekend, you will not receive a response until Monday morning.\nIf your question is much easier to discuss face-to-face, I may ask you to meet with me in my office or on Discord (at a time that works for both of us) rather than answering directly in an email.\nInclude any relevant photos / screenshots / error messages / PDFs / links with your email."
+  },
+  {
+    "objectID": "course-support.html#well-being-access-and-accommodations",
+    "href": "course-support.html#well-being-access-and-accommodations",
+    "title": "Course support",
+    "section": "Well-being, Access, and Accommodations",
+    "text": "Well-being, Access, and Accommodations\n\nWhat if I have accommodations or feel that accommodations would be beneficial to my learning?\nI enthusiastically support the mission of Disability Resource Center to make education accessible to all. I design all my courses with accessibility at the forefront of my thinking, but if you have any suggestions for ways I can make things more accessible, please let me know. Come talk to me if you need accommodation for your disabilities. I honor self-diagnosis: let’s talk to each other about how we can make the course as accessible as possible. See also the standard syllabus statements, which include more information about formal processes.\n\n\nI’m having difficulty paying for food and rent, what can I do?\nIf you have difficulty affording groceries or accessing sufficient food to eat every day, or if you lack a safe and stable place to live, and you believe this may affect your performance in the course, I urge you to contact the Dean of Students for support. Furthermore, please notify me if you are comfortable in doing so. This will enable me to advocate for you and to connect you with other campus resources.\n\n\nMy mental health is impairing my ability to engage in my classes, what should I do?\nNational surveys of college students have consistently found that stress, sleep problems, anxiety, depression, interpersonal concerns, death of a significant other and alcohol use are among the top ten health impediments to academic performance. If you are experiencing any mental health issues, I and Cal Poly are here to help you. Cal Poly’s Counseling Services (805-756-2511) is a free and confidential resource for assistance, support and advocacy.\n\n\nSomeone is threatening me, what can I do?\nI will listen and believe you if someone is threatening you. I will help you get the help you need. I commit to changing campus culture that responds poorly to dating violence and stalking.\n\n\nWhat if I can’t arrange for childcare?\nIf you are responsible for childcare on short notice, you are welcome to bring children to class with you. If you are a lactating parent, you many take breaks to feed your infant or express milk as needed. If I can support yo in navigating parenting, coursework, and other obligations in any way, please let me know."
+  },
+  {
+    "objectID": "course-support.html#technology-accommodations",
+    "href": "course-support.html#technology-accommodations",
+    "title": "Course support",
+    "section": "Technology accommodations",
+    "text": "Technology accommodations\nStudents with demonstrated high financial need who have limited access to computers may request assistance in the form of loaner laptops. For technology assistance requests, please go here. Please note that supplies are limited.\nNote that we will be using Duke’s computational resources in this course. These resources are freely available to you. As long as your computer can connect to the internet and open a browser window, you can perform the necessary computing for this course. All software we use is open-source and/or freely available."
+  },
+  {
+    "objectID": "course-support.html#course-materials-costs",
+    "href": "course-support.html#course-materials-costs",
+    "title": "Course support",
+    "section": "Course materials costs",
+    "text": "Course materials costs\nThere are no costs associated with this course. All readings will come from freely available, open resources (open-source textbooks, journal articles, etc.)."
+  },
+  {
+    "objectID": "critique/critique-1.html",
+    "href": "critique/critique-1.html",
+    "title": "Statistical Critique 1",
+    "section": "",
+    "text": "In your first statistical critique will focus on critiquing a key aspect of any statistical argument—data visualization. You have explored data visualizations over the last two weeks, thinking about what makes a plot more or less clear. You will use your knowledge of data visualizations to provide a critique for two different styles of visualizations, (1) a “pop” visualization, and (2) a “scientific” visualization.\n\n\nYou are expected to include the two visualizations you decide to critique. These visualizations must be included in the paragraph surrounding your critique, not at the end of your document.\n\n\nFor the New York Times visualization, you can left click on the image and save it to your computer.\n\n\n\nFigure 1: Options when left clicking on NYT visualization – either copy the image or save it to your computer\n\n\nFor the visualization from your research article, you may need to take screenshot of the page and crop it to only include the image.\n\n\n\nFigure 2: Cropped image from scientific article\n\n\n\n\n\n\nYou are allowed to use any text editing software to make your critique (e.g., Word, Pages, Google Docs), but your submission must be a PDF. If you are unsure how to save your file as a PDF, I recommend using Google!"
+  },
+  {
+    "objectID": "critique/critique-1.html#including-your-visualizations",
+    "href": "critique/critique-1.html#including-your-visualizations",
+    "title": "Statistical Critique 1",
+    "section": "",
+    "text": "You are expected to include the two visualizations you decide to critique. These visualizations must be included in the paragraph surrounding your critique, not at the end of your document.\n\n\nFor the New York Times visualization, you can left click on the image and save it to your computer.\n\n\n\nFigure 1: Options when left clicking on NYT visualization – either copy the image or save it to your computer\n\n\nFor the visualization from your research article, you may need to take screenshot of the page and crop it to only include the image.\n\n\n\nFigure 2: Cropped image from scientific article"
+  },
+  {
+    "objectID": "critique/critique-1.html#submission",
+    "href": "critique/critique-1.html#submission",
+    "title": "Statistical Critique 1",
+    "section": "",
+    "text": "You are allowed to use any text editing software to make your critique (e.g., Word, Pages, Google Docs), but your submission must be a PDF. If you are unsure how to save your file as a PDF, I recommend using Google!"
+  },
+  {
+    "objectID": "critique/critique-1.html#getting-started",
+    "href": "critique/critique-1.html#getting-started",
+    "title": "Statistical Critique 1",
+    "section": "2.1 Getting Started",
+    "text": "2.1 Getting Started\n\nGo to the What’s Going on in This Graph website\nScroll through the weekly graphs and click on a plot that you are interested in\nSave the image to your computer (as instructed above)"
+  },
+  {
+    "objectID": "critique/critique-1.html#visualization-critique",
+    "href": "critique/critique-1.html#visualization-critique",
+    "title": "Statistical Critique 1",
+    "section": "2.2 Visualization Critique",
+    "text": "2.2 Visualization Critique\nYour critique of the visualization you selected needs to address the following questions:\n\nWhat aesthetics are being used in the plot?\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: aesthetics map variables to aspects of the plot\n\n\n\nName at least two things the visualization does well — What makes the visualization clear to the reader?\nName at least two ways the visualization could be improved — What would the reader struggle to understand?"
+  },
+  {
+    "objectID": "critique/critique-1.html#getting-started-1",
+    "href": "critique/critique-1.html#getting-started-1",
+    "title": "Statistical Critique 1",
+    "section": "3.1 Getting Started",
+    "text": "3.1 Getting Started\n\nAccess the research article you selected in Week 1. If you cannot find it on your computer, go to the Week 1: Statitics in Your Field assignment\nSave the image to your computer (as instructed above)"
+  },
+  {
+    "objectID": "critique/critique-1.html#visualization-critique-1",
+    "href": "critique/critique-1.html#visualization-critique-1",
+    "title": "Statistical Critique 1",
+    "section": "3.2 Visualization Critique",
+    "text": "3.2 Visualization Critique\nYour critique of the visualization you selected needs to address the following questions:\n\nWhat aesthetics are being used in the plot?\n\n\n\n\n\n\n\nTip\n\n\n\nRemember: aesthetics map variables to aspects of the plot\n\n\n\nName at least two things the visualization does well — What makes the visualization clear to the reader?\nName at least two ways the visualization could be improved — What would the reader struggle to understand?\n\n\n\n\n\n\n\nCaution\n\n\n\nIf the article you selected does not have a visualization, you are permitted to substitute a table for a visualization. You will address the following questions:\n\nWhat aesthetics are being used in the table? Similar to a visualization, the aesthetics of a table are variables being mapped to aspects of the table.\nName at least two things the table does well — What makes the table clear to the reader?\nName at least two ways the table could be improved — What would the reader struggle to understand?"
+  },
+  {
+    "objectID": "course-syllabus.html",
+    "href": "course-syllabus.html",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "",
+    "text": "Instructor: Dr. Allison Theobold – call me Dr. Theobold or Dr. T! I use they / she pronouns (that is my order of preference)."
+  },
+  {
+    "objectID": "course-syllabus.html#textbooks",
+    "href": "course-syllabus.html#textbooks",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "3.1 Textbooks",
+    "text": "3.1 Textbooks\n\n\n\n\n\nÇetinkaya-Rundel and Hardin, Introduction to Modern Statistics. https://openintro-ims.netlify.app/\n\n\n\n\n\n\n\n\nIsmay & Kim, Modern Dive: Statistical Inference via Data Science. https://moderndive.com"
+  },
+  {
+    "objectID": "course-syllabus.html#required-technology",
+    "href": "course-syllabus.html#required-technology",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "3.2 Required Technology",
+    "text": "3.2 Required Technology\n\n\n\n\n\nR is the statistical software we will be using in this course (https://cran.r-project.org/)\n\n\n\n\n\n\nRStudio is the most popular way to interact with the R software. We will be interacting with RStudio through Posit Cloud (Posit is the company that owns RStudio). You will join the Stat 313 workspace, and then be able to access the course homework and lab assignments. We will be walking through this in the first week of lab!\n\n\n\n\n\n\nFor questions of general interest, such as course clarifications or conceptual questions, please use the Class Discord Server. Refer to the Day One Class Setup materials for more information on how to effectively use this server."
+  },
+  {
+    "objectID": "course-syllabus.html#my-course-goals",
+    "href": "course-syllabus.html#my-course-goals",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "4.1 My course goals",
+    "text": "4.1 My course goals\n\n\nData Visualization & Summarization\n\ncreate visualizations for one and two numerical variables\nuse facets and / or color to include additional variables into a visualization\ncalculate numerical summaries of variables\nfind summaries of variables across multiple groups\n\nWorking with Data & Reproducibility\n\nselect necessary columns from a dataset\nfilter rows from a dataset for numerical and categorical variables\nmodify existing numerical and categorical variables and / or create new variables\ncreate professional-looking, reproducible analyses using Posit projects, Quarto documents, and the here package\n\nLinear Models & Model Selection\n\nidentify which linear model is appropriate for a given research question\ndescribe the conditions required to obtain reliable estimates from linear models\nuse visualizations, summary statistics, and critical thinking to evaluate if linear model conditions are violated\nidentify methods to remedy condition violations\nfit additive and interactive linear models in R\ninterpret the coefficient estimates of a linear model\nuse visualizations and model selection techniques to determine if a specific variable should be included in a linear model\n\n\n\n\nStudy Design\n\ndistinguish between an experiment and an observational study\nidentify sources of variation and describe how to account for them\nexplain differences in sampling methods and contrast the inferences they permit\nargue what population a given sample is representative of\n\nFundamentals of Statistical Inference\n\nidentify the parameter of interest for a given linear model and associated research question\noutline the null (\\(H_0\\)) and alternative (\\(H_A\\)) hypotheses for a given research question\ndescribe what a null distribution is and how it is used to obtain a p-value\ninterpret a p-value in the context of a research question\nuse a p-value to make a decision about a hypothesis test and reach a conclusion about a research question\ndistinguish between Type I and Type II errors\ndescribe how sample size, significance level, and sampling variability effect Type I and Type II errors\noutline the strengths and weaknesses of significance testing\ndescribe what a bootstrap distribution is and how it is used to obtain a confidence interval\ninterpret a confidence interval in the context of the parameter of interest\ndescribe the connection between confidence intervals and hypothesis testing"
+  },
+  {
+    "objectID": "course-syllabus.html#what-assessments-will-there-be",
+    "href": "course-syllabus.html#what-assessments-will-there-be",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "5.1 What assessments will there be?",
+    "text": "5.1 What assessments will there be?\nThe main idea of assessment in this course is communication and feedback. There are several different types of assessments or assignments in this class, but they will all allow you to check your own understanding and progress towards the learning goals, get in-depth feedback from me, and let me know where to spend more time or approach something differently.\nEach one is described briefly here, grouped into categories by course goal. See Section 5 for an explanation of how these contribute to your final grade. Our class schedule with topics is in Section 10."
+  },
+  {
+    "objectID": "course-syllabus.html#interpret-and-use-statistical-concepts",
+    "href": "course-syllabus.html#interpret-and-use-statistical-concepts",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "5.2 Interpret and use statistical concepts",
+    "text": "5.2 Interpret and use statistical concepts\n\nReadings and videos (every week)\nI favor a “flipped classroom,” as it gives you more time to clarify and solidify statistical concepts through hands-on exercises. Each week, you will read the required chapter(s), completing a required reading guide to walk you through the central concepts for each week. You are required to submit your completed reading guides by Monday at midnight.\n\n\nConcept quizzes (every week)\nEach week there will be a short (~10 questions) quiz over the reading and videos from the week. These quizzes are intended to ensure that you grasped the key concepts from the week’s readings. The quizzes are not timed, so you can feel free to check your answers with the textbook and / or videos if you so wish. The quizzes are marked on completion as complete or incomplete. You are required to complete the concept quiz by Tuesday at noon.\n\n\nTutorials (every week)\nYou can think of the tutorials as an “interactive” textbook, as they interweave statistical ideas alongside examples of how to work with data in R and hands-on exercises writing the R code necessary to complete a given task. Each exercise has hints available if you get stuck!\nThe tutorials are work at your own pace, so you can complete them all at once or slowly throughout the week. The lab assignments will require for you to put the skills you learned in the tutorials to work, so you are required to complete each week’s tutorial before Thursday’s lab.\nThe tutorials are marked on completion as complete or incomplete. You will submit a screenshot of the completion page at the end of the tutorial to confirm that you completed the tutorial for the week. You are required to complete the tutorial by Thursdays at noon."
+  },
+  {
+    "objectID": "course-syllabus.html#critically-evaluate-the-use-of-statistics",
+    "href": "course-syllabus.html#critically-evaluate-the-use-of-statistics",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "5.3 Critically evaluate the use of Statistics",
+    "text": "5.3 Critically evaluate the use of Statistics\n\nStatistical critiques (every 4-weeks)\nThese assignments are case studies in which you will evaluate a data visualization or statistical analysis, determining how well-performed and presented the analysis was and making recommendations for improving or using the analysis. Critiques are due roughly 1-week after they are assigned and should take 1-2 hours. You will receive feedback and a mark of Success or Growing (elaborated more on later), and you will be able to revise based on that feedback. There will be four total critiques."
+  },
+  {
+    "objectID": "course-syllabus.html#perform-statistical-analyses-to-answer-research-questions",
+    "href": "course-syllabus.html#perform-statistical-analyses-to-answer-research-questions",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "5.4 Perform statistical analyses to answer research questions",
+    "text": "5.4 Perform statistical analyses to answer research questions\n\nLab Assignments (every week)\nLabs will be assigned on Thursday every week, providing the opportunity to explore the course concepts in the context of real data. Lab assignments will require for you to work through the tutorial for the week, thus the tutorials are due before the start of class on Thursday.\nYou will complete the lab assignments in the same teams you collaborate with in class. You will access the lab assignment through Posit Cloud, which you will be walked through during the first lab. Your group will be expected to submit your completed lab on Canvas. You will need to submit both the HTML and Quarto documents. The individual assigned as the Report Manager (described below) will submit the team’s completed Lab assignment by Sunday at midnight.\n\nSuccess / Growing Grading\nI expect that you will approach each lab assignment seriously, investing the necessary time and energy to prepare your responses. Different from what you may have experienced, lab assignments are graded for “proficiency” of specific learning targets, which describe what you should be able to do after taking this course. You’ll receive a score for each problem on an assignment according to the Success / Not Yet rubric below, as well as feedback to help you improve.\n\n\n\n\n\n\n\nScore\nJustification\n\n\n\n\nSuccessful\nThe solution to the problem is correct, legible, and easy to follow, with all reasoning provided. Any error is trivial.\n\n\nGrowing\nThe solution shows growth toward mastering the topic; however, it is incorrect and/or incomplete.\n\n\n\n\n\nCompleting Revisions\nAfter the first submission of your lab or critique, you will have the option to retry any problems for which you scored a Growing (G). A written reflection on how your understanding of the problem changed will accompany any revision. If you don’t earn a Success by the second try, you can make an appointment with me to meet during my office hours (or another agreed-upon time) to create a reassessment strategy. You can schedule up to one meeting per week.\nYou can submit up to one revised Lab Assignment or Statistical Critique per week, until Sunday, June 11 at 11:59 pm.\n\n\nReflections on Your Learning\nRevisions must include a reflection describing how you revised your thinking when completing your revision. It’s not enough to say “[x] was wrong, so I fixed it”—you have to talk about why you got [x] wrong in the first place and what you learned that changed your mind. What do you know now that you didn’t know before? Who or what helped you learn?\n\nIf your revision does not include reflections, I’ll ask you to add them.\nSee some examples of really good reflections here – they’re (mostly) from an introductory statistics class, but I think you’ll get the idea.\n\nSubmit your revision to the same assignment box on Canvas as your original. This helps me keep track of any outstanding revisions each person has."
+  },
+  {
+    "objectID": "course-syllabus.html#synthesize-statistical-ideas",
+    "href": "course-syllabus.html#synthesize-statistical-ideas",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "5.5 Synthesize statistical ideas",
+    "text": "5.5 Synthesize statistical ideas\n\nMidterm & Final Projects\nThere will be two projects throughout the quarter, where you will be asked to synthesize the statistical concepts you have learned in a formal statistical report. Your critiques will help guide you toward how you do / don’t want your report to look. Each project will be done independently, and requires you to submit a project proposal and draft report before the final deadline. You are encouraged to use the feedback received on these assignments to improve your final report. The final reports will be graded as Excellent, Satisfactory, Progressing, or No Credit based on a rubric that will be shared with the initial assignment."
+  },
+  {
+    "objectID": "course-syllabus.html#what-if-i-have-accommodations-or-feel-that-accommodations-would-be-beneficial-to-my-learning",
+    "href": "course-syllabus.html#what-if-i-have-accommodations-or-feel-that-accommodations-would-be-beneficial-to-my-learning",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "7.1 What if I have accommodations or feel that accommodations would be beneficial to my learning?",
+    "text": "7.1 What if I have accommodations or feel that accommodations would be beneficial to my learning?\nI enthusiastically support the mission of Disability Resource Center to make education accessible to all. I design all my courses with accessibility at the forefront of my thinking, but if you have any suggestions for ways I can make things more accessible, please let me know. Come talk to me if you need accommodation for your disabilities. I honor self-diagnosis: let’s talk to each other about how we can make the course as accessible as possible. See also the standard syllabus statements, which include more information about formal processes."
+  },
+  {
+    "objectID": "course-syllabus.html#im-having-difficulty-paying-for-food-and-rent-what-can-i-do",
+    "href": "course-syllabus.html#im-having-difficulty-paying-for-food-and-rent-what-can-i-do",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "7.2 I’m having difficulty paying for food and rent, what can I do?",
+    "text": "7.2 I’m having difficulty paying for food and rent, what can I do?\nIf you have difficulty affording groceries or accessing sufficient food to eat every day, or if you lack a safe and stable place to live, and you believe this may affect your performance in the course, I urge you to contact the Dean of Students for support. Furthermore, please notify me if you are comfortable in doing so. This will enable me to advocate for you and to connect you with other campus resources."
+  },
+  {
+    "objectID": "course-syllabus.html#my-mental-health-is-impairing-my-ability-to-engage-in-my-classes-what-should-i-do",
+    "href": "course-syllabus.html#my-mental-health-is-impairing-my-ability-to-engage-in-my-classes-what-should-i-do",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "7.3 My mental health is impairing my ability to engage in my classes, what should I do?",
+    "text": "7.3 My mental health is impairing my ability to engage in my classes, what should I do?\nNational surveys of college students have consistently found that stress, sleep problems, anxiety, depression, interpersonal concerns, death of a significant other and alcohol use are among the top ten health impediments to academic performance. If you are experiencing any mental health issues, I and Cal Poly are here to help you. Cal Poly’s Counseling Services (805-756-2511) is a free and confidential resource for assistance, support and advocacy."
+  },
+  {
+    "objectID": "course-syllabus.html#someone-is-threatening-me-what-can-i-do",
+    "href": "course-syllabus.html#someone-is-threatening-me-what-can-i-do",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "7.4 Someone is threatening me, what can I do?",
+    "text": "7.4 Someone is threatening me, what can I do?\nI will listen and believe you if someone is threatening you. I will help you get the help you need. I commit to changing campus culture that responds poorly to dating violence and stalking."
+  },
+  {
+    "objectID": "course-syllabus.html#what-if-i-cant-arrange-for-childcare",
+    "href": "course-syllabus.html#what-if-i-cant-arrange-for-childcare",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "7.5 What if I can’t arrange for childcare?",
+    "text": "7.5 What if I can’t arrange for childcare?\nIf you are responsible for childcare on short notice, you are welcome to bring children to class with you. If you are a lactating parent, you many take breaks to feed your infant or express milk as needed. If I can support yo in navigating parenting, coursework, and other obligations in any way, please let me know."
+  },
+  {
+    "objectID": "course-syllabus.html#what-if-i-need-to-miss-class",
+    "href": "course-syllabus.html#what-if-i-need-to-miss-class",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "8.1 What if I need to miss class?",
+    "text": "8.1 What if I need to miss class?\nI encourage you to attend every class session, but policies are for narcs. I put a great deal of time into making each class session engaging and worth your time. Attendance in this course is not explicitly required, but it degrades your team’s trust in you when they don’t see you in class.\nHere’s what you should do if you do miss a class:\n\nTalk to a classmate to figure out what information you missed\nCheck Canvas for any necessary handouts or changes to assignments\nEmail me with any questions you have after reviewing notes and handouts\n\nIf you miss a bunch of classes, please come talk to me. I’m working from the assumption that you care and are trying, but something is getting in your way (health issues? depression / anxiety? college stress?); let’s figure out what that is and how I can help."
+  },
+  {
+    "objectID": "course-syllabus.html#what-if-i-need-to-turn-something-in-late",
+    "href": "course-syllabus.html#what-if-i-need-to-turn-something-in-late",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "8.2 What if I need to turn something in late?",
+    "text": "8.2 What if I need to turn something in late?\nAssignments are expected to be submitted on time. However, every student will be permitted to submit up to three individual assignments up to 4-days late, by completing the deadline extension form. Similar to the “real world,” deadline extensions must be requested before an assignment is due.\nWhen you complete the deadline extension form you will be required to state (1) what assignment you need an extension for, and (2) your proposed new deadline. Your new deadline must be within 4-days of the original deadline.\nAll deadline extensions must be done through the form, so I can keep track of who has used their allotment of extensions. If you are registered with DRC to have deadline extensions, you are required to complete a deadline extension request and make a note if your extension is related to a disability related need.\nAny late work is required to have a deadline extension request, meaning if you do not complete a deadline extension request for an assignment you are not permitted to turn it in late."
+  },
+  {
+    "objectID": "course-syllabus.html#do-i-need-to-bring-a-computer-to-class",
+    "href": "course-syllabus.html#do-i-need-to-bring-a-computer-to-class",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "8.3 Do I need to bring a computer to class?",
+    "text": "8.3 Do I need to bring a computer to class?\nYou are allowed to use technology in the classroom! In fact, we will often do so as part of in-class activities. However, our class is held in a computer laboratory, so bringing a laptop is not required. You are permitted to use the lab computers, but if you would like to take notes on your computer / surface you are welcome to bring it to class."
+  },
+  {
+    "objectID": "course-syllabus.html#how-can-i-expect-to-be-treated-in-this-course",
+    "href": "course-syllabus.html#how-can-i-expect-to-be-treated-in-this-course",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "9.1 How can I expect to be treated in this course?",
+    "text": "9.1 How can I expect to be treated in this course?\nFollowing Ihab Hassan, I strive to teach statistics so that people will stop killing each other. In my classroom, diversity and individual differences are a sources of strength. One of the greatest failures of Statistics, historically and in the present, has been the exclusion of voices from the field. Everyone here can learn from each other, and doing so is vital to the structure of the course. Significant portions of this course involve group work and discussion in class. Some discussions will touch on sensitive topics. So that everyone feels comfortable participating in these activities, we must listen to each other and treat each other with respect. Any attitude or belief that espouses the superiority of one group of people over another is not welcome in my classroom. Such beliefs are directly destructive to the sense of community that we strive to create, and will sabotage our ability to learn from each other (and thus sabotage the entire structure of the course).\nIn summary: Be good to each other."
+  },
+  {
+    "objectID": "course-syllabus.html#working-in-teams",
+    "href": "course-syllabus.html#working-in-teams",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "9.2 Working in teams",
+    "text": "9.2 Working in teams\nYour team will be rotating group roles each week, so that one person does not act as the “team manager” for more than one week. Instead the following roles will circulate each week, so that each member of the group is able to complete each role.\n\n\n\n\n\n\n\n\nFacilitator\nManages team progress through the task\n\nLeads discussion\nMakes sure everyone understands the task\nKeeps the group moving forward\nChecks in with group members\nCalls professor / TA over for group questions only\n\nRecorder / Reporter\nManages in-class report\n\nResponsible for organizing and recording answers to the assignment during discussions\nCompiles a summary of the solutions discussed\nSolicits feedback on summaries from other group members\nResponsible for submitting final version of assignment\n\nTeam Captain\nManages team participation\n\nEncourages participation\nFinds compromises\nEnforces norms\nBrings conversation back if it deviates\nSubstitutes for absent roles\n\n\n\n\n\nPeer evaluations\nThere will be confidential peer evaluations completed every four weeks. I will use these to check-in on each group’s dynamics and ensure that everyone feels their voice is being heard."
+  },
+  {
+    "objectID": "course-syllabus.html#what-constitutes-plagiarism-in-a-statistics-class",
+    "href": "course-syllabus.html#what-constitutes-plagiarism-in-a-statistics-class",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "9.3 What constitutes plagiarism in a statistics class?",
+    "text": "9.3 What constitutes plagiarism in a statistics class?\nParaphrasing or quoting another’s work without citing the source is a form of academic misconduct. This included the R code produced by someone else! Writing code is like writing a paper, it is obvious if you copied-and-pasted a sentence from someone else into your paper because the way each person writes is different.\nEven inadvertent or unintentional misuse or appropriation of another’s work (such as relying heavily on source material that is not expressly acknowledged) is considered plagiarism. If you are struggling with writing the R code for an assignment, please reach out to me. I would prefer that I get to help you rather than you spending hours Googling things and get nowhere!\nAny incident of dishonesty, copying or plagiarism will be reported to the Office of Student Rights and Responsibilities. Cheating or plagiarism will earn you a grade of N on the problem or assignment and will remove your ability to submit revisions for that assignment.\nIf you have any questions about using and citing sources, you are expected to ask for clarification.\nFor more information about what constitutes cheating and plagiarism, please see https://academicprograms.calpoly.edu/content/academicpolicies/Cheating."
+  },
+  {
+    "objectID": "course-syllabus.html#unit-1-foundations-of-statistics-week-1",
+    "href": "course-syllabus.html#unit-1-foundations-of-statistics-week-1",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.1 Unit 1: Foundations of Statistics (Week 1)",
+    "text": "10.1 Unit 1: Foundations of Statistics (Week 1)\nThis introductory unit has three big tasks, (1) review statistical and data oriented concepts you have (likely) seen before, (2) think critically about why statistics is used in science, and (3) think about how (historically) statistics has been used for inference.\nReading: Chapters 1 and 2 in Introduction to Modern Statistics (IMS), with supplementary articles"
+  },
+  {
+    "objectID": "course-syllabus.html#unit-2-exploratory-data-analysis-weeks-2-3",
+    "href": "course-syllabus.html#unit-2-exploratory-data-analysis-weeks-2-3",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.2 Unit 2: Exploratory Data Analysis (Weeks 2 & 3)",
+    "text": "10.2 Unit 2: Exploratory Data Analysis (Weeks 2 & 3)\nThis unit focuses on building skills for working with and visualizing different types of data. First, we will focus on categorical data–creating summary tables and barcharts. Next, we will turn our attention to numerical data–calculating summary statistics, histograms, scatterplots, and linegraphs.\nReading: Chapters 4 & 5 in IMS and Chapter 2 in Modern Dive"
+  },
+  {
+    "objectID": "course-syllabus.html#unit-3-regression-modeling-weeks-4-5",
+    "href": "course-syllabus.html#unit-3-regression-modeling-weeks-4-5",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.3 Unit 3: Regression Modeling (Weeks 4 & 5)",
+    "text": "10.3 Unit 3: Regression Modeling (Weeks 4 & 5)\nIn this unit we finally begin exploring statistical methods. You will put the tools you learned for wrangling and visualizing to work in the context of linear regression. We will start in a (likely) familiar context–linear regression. Once we’ve explored the concepts of “simple” / basic regression we will turn up the heat and add some additional explanatory variables with multiple linear regression.\nReading:\n\nChapter 5 in Modern Dive\nChapter 6 in Modern Dive"
+  },
+  {
+    "objectID": "course-syllabus.html#unit-4-model-selection-inference-for-regression-weeks-6-7",
+    "href": "course-syllabus.html#unit-4-model-selection-inference-for-regression-weeks-6-7",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.4 Unit 4: Model Selection & Inference for Regression (Weeks 6 & 7)",
+    "text": "10.4 Unit 4: Model Selection & Inference for Regression (Weeks 6 & 7)\nThis unit focuses on how we decide what variables should be included in our regression models and what we can say about the final models we obtain. We will explore these ideas using concepts you have seen before: hypothesis tests and confidence intervals. We will visit the ideas of p-values and significance testing, with a emphasis on making (and justifying) sound scientific decisions with the intention of obtaining the best regression model we can."
+  },
+  {
+    "objectID": "course-syllabus.html#unit-5-condition-violations-week-8",
+    "href": "course-syllabus.html#unit-5-condition-violations-week-8",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.5 Unit 5: Condition Violations (Week 8)",
+    "text": "10.5 Unit 5: Condition Violations (Week 8)\nThere are occasions where the conditions required for linear regression are violated. Rather than throwing up our hands and saying “Oh, well!”, we can use variable transformations to lessen condition violations. This unit will explore the use of log transformations to remedy non-linear relationships and non-constant variance."
+  },
+  {
+    "objectID": "course-syllabus.html#unit-6-anova-a-categorical-case-of-regression-weeks-9-10",
+    "href": "course-syllabus.html#unit-6-anova-a-categorical-case-of-regression-weeks-9-10",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "10.6 Unit 6: ANOVA a Categorical Case of Regression (Weeks 9 & 10)",
+    "text": "10.6 Unit 6: ANOVA a Categorical Case of Regression (Weeks 9 & 10)\nTo wrap up the quarter, we will look at a special case of linear regression–ANOVA. In this special case, our regression will include only categorical variables as explanatory variables. We will first review how we compare the means of two groups and then connect with what we learned about categorical variables in multiple linear to conceptualize how we can compare the means of three or more groups.\nThis unit will explore Chapter 22 in IMS"
+  },
+  {
+    "objectID": "course-syllabus.html#footnotes",
+    "href": "course-syllabus.html#footnotes",
+    "title": "STAT 313: Applied Experimental Design and Regression Models",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nSee Section 6.0.2 for information on what you can expect when you email me.↩︎\nA “Satisfactory” lab or critique occurs when every problem has been marked Satisfactory.↩︎"
+  }
+]
