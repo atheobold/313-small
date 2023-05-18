@@ -1,0 +1,15 @@
+---
+title: "R Resources"
+---
+
+::: callout-tip
+Click on the link related to a specific week to explore R skills learned that week!
+:::
+
+# Weekly R Resources
+
+#### [Week 2 -- Exploring Numerical Variables](resources/week2.docx)
+
+#### [Week 3 -- Incorporating Categorical Variables](resources/week3.docx)
+
+#### [Week 4 -- Simple Linear Regression](resources/week4.docx)

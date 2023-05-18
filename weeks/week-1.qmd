@@ -1,0 +1,147 @@
+---
+title: 'Week One: Foundations of Statistics'
+subtitle: Winter 2023
+format:
+  html:
+    theme: minty
+    fontsize: 1em
+    mainfont: "sans-serif"
+    number-sections: true
+    section-divs: true
+    code-block-bg: '#76b5c5'
+    highlight-style: monochrome
+    embed-resources: true
+    standalone: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+Welcome!
+
+In this coursework, you'll get a refresher on the foundational components of statistics and data, investigate how statistics is used in your major, and think critically about the philosophy of statistical inference.
+
+## Learning Outcomes
+
+By the end of this coursework you should be able to:
+
+-   describe observations, variables, and data matrices
+
+-   explain the different types of variables a study can have
+
+-   illustrate the difference between explanatory and response variables
+
+-   delineate the difference between a population and a sample
+
+-   compare and contrast different sampling methods
+
+-   outline what is necessary to make an experiment an "experiment"
+
+-   characterize the differences between observational studies and experiments
+
+-   describe the difference between little "s" statistics and big "S" Statistics
+
+-   outline what "dichotomous thinking" is
+
+-   illustrate how dichotomous thinking is used in Statistics
+
+-   explain issues with using the term "significant" in Statistics
+
+# Prepare
+
+Let's start off by reading a refresher on some of the foundational concepts for data!
+
+## Textbook Reading
+
+📖 [**Required Reading:** *Introduction to Modern Statistics* -- Hello Data](https://openintro-ims.netlify.app/data-hello.html)
+
+📖 [**Required Reading:** *Introduction to Modern Statistics* -- Study Design](https://openintro-ims.netlify.app/data-design.html)
+
+### Reading Guide -- Due Tuesday by noon
+
+[Download the Word Document](reading-guide/week1-reading.docx)
+
+*Note:* There is **one** combined reading guide for both chapters.
+
+::: callout-note
+# Submission
+
+Submit your completed reading guide to the Canvas assignment portal!
+:::
+
+## Concept Quiz -- Due Tuesday by noon
+
+**1. What are the different types of variables that can appear in a dataset? Select all that apply!**
+
+-   discrete numerical
+-   ordinal categorical
+-   nominal categorical
+-   continuous numerical
+-   discrete categorical
+
+**2. Just because a variable has numeric values, does not mean it is a numeric variable. Which of the following variables appear numerical but behave like a categorical variable? Select all that apply!**
+
+-   zip code
+-   GPA
+-   height
+-   year in school
+
+**3. Which of the following statements are true about observational studies and experiments? Select all that apply!**
+
+-   Experiments randomly assign the explanatory variable
+-   Observational studies randomly assign the explanatory variable
+-   Observational studies can make causal statements about the relationship between the explanatory and response variables
+-   Experiments can make causal statements about the relationship between the explanatory and response variables
+
+**4. What are different methods for sampling from a population? Select all that apply!**
+
+-   simple random sampling
+-   stratified random sampling
+-   cluster sampling
+-   multistage sampling
+-   convenience sampling
+
+**5. Cluster sampling and stratified sampling both rely on grouping observations, but have important differences. Match each method to how observations are randomly sampled.**
+
+::: columns
+::: {.column width="35%"}
+**stratified sampling**
+
+**cluster sampling**
+:::
+
+::: {.column width="35%"}
+*groups of observations are created, groups are randomly selected, every observation in the selected group is sampled*
+
+*groups of observations are created, observations within a group are randomly sampled*
+:::
+:::
+
+# R Tutorial -- Due Thursday by noon
+
+💻 [**Required Tutorial:** Language of Data](https://openintro.shinyapps.io/ims-01-data-01/#section-welcome)
+
+::: callout-note
+# Submission
+
+Submit a screenshot of the completion page to the Canvas assignment portal!
+:::
+
+# Statistics in Your Field
+
+Now let's investigate how statistics is used in your discipline.
+
+Find a peer-reviewed article from a journal in your field that performs a statistical analysis somewhere in the paper. You **do not** need to be familiar with the analysis they do. That being said, if you want to find a paper that uses a statistical method we'll cover in this class, look for a paper that uses "linear regression" or "ANOVA."
+
+The Library is a great resource for this! The [following website (https://csu-calpoly.primo.exlibrisgroup.com/discovery/jsearch?vid=01CALS_PSU:01CALS_PSU)](https://csu-calpoly.primo.exlibrisgroup.com/discovery/jsearch?vid=01CALS_PSU:01CALS_PSU) has a list of journals by discipline that are available through the library.
+
+::: callout-tip
+If you are having a hard time finding a peer reviewed journal article, here is a video of me talking through how I found one: <https://www.youtube.com/watch?v=ui8ibJ0Pkhs>
+:::
+
+## Statistical Critique Step 0 -- Due Friday by 5pm
+
+Upload a PDF of your journal article to the Canvas assignment portal.
+
