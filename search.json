@@ -256,28 +256,28 @@
     "href": "slides/week1-day2.html#section",
     "title": "Working with Data",
     "section": "",
-    "text": "There’s Data\n\n\nGender stereotypes in 5-7 year old children\n\n\n\n\n\n\n\n\nsubject\nsex\nage\ntrait\ntarget\nstereotype\nhigh_achieve_caution\n\n\n\n\n64\nmale\n7\nnice\nadults\n0.25\n0.50\n\n\n107\nmale\n7\nsmart\nchildren\n0.25\n0.50\n\n\n23\nmale\n6\nnice\nadults\n0.75\n0.75\n\n\n65\nmale\n7\nsmart\nadults\n0.00\n0.75\n\n\n47\nfemale\n7\nnice\nadults\n1.00\n0.50\n\n\n59\nmale\n7\nnice\nadults\n0.25\n0.75"
+    "text": "There’s Data\n\n\nGender stereotypes in 5-7 year old children\n\n\n\n\n\n\n\n\nsubject\nsex\nage\ntrait\ntarget\nstereotype\nhigh_achieve_caution\n\n\n\n\n118\nfemale\n7\nnice\nadults\n0.25\n0.75\n\n\n54\nfemale\n7\nnice\nchildren\n1.00\n0.75\n\n\n76\nfemale\n5\nnice\nchildren\n1.00\n1.00\n\n\n18\nmale\n5\nsmart\nadults\n0.75\n0.25\n\n\n89\nmale\n7\nnice\nchildren\n0.00\n0.00\n\n\n21\nmale\n6\nsmart\nadults\n0.25\n0.50"
   },
   {
     "objectID": "slides/week1-day2.html#section-1",
     "href": "slides/week1-day2.html#section-1",
     "title": "Working with Data",
     "section": "",
-    "text": "Lots of Data\n\nBody girth measurements and skeletal diameter measurements for 247 men and 260 women.\n\n\n\n\n\n\nage\nwgt\nhgt\nsex\nsho_gi\nwai_gi\nnav_gi\nhip_gi\n\n\n\n\n30\n93.8\n192.7\n1\n112.2\n88.3\n93.5\n105.0\n\n\n44\n87.7\n177.8\n1\n120.4\n98.0\n101.8\n101.5\n\n\n55\n87.3\n179.1\n1\n122.4\n98.0\n98.0\n99.6\n\n\n24\n74.5\n182.4\n1\n115.0\n76.8\n80.0\n94.5\n\n\n37\n52.7\n156.0\n0\n97.4\n69.0\n76.3\n86.7\n\n\n20\n69.0\n168.9\n0\n104.5\n75.0\n95.0\n104.9"
+    "text": "Lots of Data\n\nBody girth measurements and skeletal diameter measurements for 247 men and 260 women.\n\n\n\n\n\n\nage\nwgt\nhgt\nsex\nsho_gi\nwai_gi\nnav_gi\nhip_gi\n\n\n\n\n52\n82.7\n188.0\n1\n115.4\n86.0\n93.8\n97.1\n\n\n22\n72.9\n170.0\n0\n106.3\n81.8\n96.5\n99.3\n\n\n35\n70.5\n161.3\n0\n107.7\n76.4\n98.3\n107.0\n\n\n34\n53.2\n159.4\n0\n99.4\n67.4\n85.9\n90.3\n\n\n34\n68.0\n184.4\n1\n106.9\n75.2\n80.2\n91.6\n\n\n19\n67.9\n161.3\n0\n100.1\n75.7\n88.6\n102.6"
   },
   {
     "objectID": "slides/week1-day2.html#section-2",
     "href": "slides/week1-day2.html#section-2",
     "title": "Working with Data",
     "section": "",
-    "text": "In Every Context\n\n\nNBA player of the week from 1985 to 2016\n\n\n\n\n\n\n\n\nAge\nDate\nDraft Year\nHeight\nPlayer\nPosition\n\n\n\n\n24\nJan 12, 2015\n2011\n6-1\nKemba Walker\nG\n\n\n26\nFeb 26, 1989\n1985\n7-0\nPatrick Ewing\nC\n\n\n26\nNov 4, 1984\n1981\n6-10\nLarry Nance\nPF\n\n\n24\nDec 3, 2012\n2007\n6-9\nKevin Durant\nSF\n\n\n31\nMar 27, 1994\n1984\n7-0\nKevin Willis\nC\n\n\n24\nNov 12, 1995\n1993\n6-7\nPenny Hardaway\nPG"
+    "text": "In Every Context\n\n\nNBA player of the week from 1985 to 2016\n\n\n\n\n\n\n\n\nAge\nDate\nDraft Year\nHeight\nPlayer\nPosition\n\n\n\n\n33\nNov 30, 2009\n1997\n6-11\nTim Duncan\nFC\n\n\n28\nNov 18, 1990\n1983\n6-7\nClyde Drexler\nSG\n\n\n31\nNov 14, 2005\n1996\n6-11\nMarcus Camby\nC\n\n\n30\nNov 30, 2003\n1994\n6-4\nVoshon Lenard\nSG\n\n\n24\nDec 19, 2005\n2001\n6-7\nJoe Johnson\nSG\n\n\n33\nNov 16, 1986\n1976\n7-0\nRobert Parish\nC"
   },
   {
     "objectID": "slides/week1-day2.html#section-3",
     "href": "slides/week1-day2.html#section-3",
     "title": "Working with Data",
     "section": "",
-    "text": "You Can Imagine\n\n\nFish Sampled on Blackfoot River\n\n\n\n\n\n\n\n\ntrip\nmark\nlength\nweight\nyear\nsection\nspecies\n\n\n\n\n1\n0\n422\n640\n2004\nScottyBrown\nRBT\n\n\n2\n1\n391\nNA\n1998\nScottyBrown\nWCT\n\n\n1\n0\n275\n220\n2004\nJohnsrud\nRBT\n\n\n1\n0\n220\n90\n2002\nJohnsrud\nBrown\n\n\n1\n0\n374\n360\n1989\nScottyBrown\nRBT\n\n\n1\n0\n219\n100\n1990\nJohnsrud\nRBT"
+    "text": "You Can Imagine\n\n\nFish Sampled on Blackfoot River\n\n\n\n\n\n\n\n\ntrip\nmark\nlength\nweight\nyear\nsection\nspecies\n\n\n\n\n2\n0\n144\n40\n2004\nScottyBrown\nBrown\n\n\n2\n0\n125\n30\n2006\nJohnsrud\nRBT\n\n\n2\n1\n235\nNA\n2004\nScottyBrown\nWCT\n\n\n2\n0\n345\n390\n2000\nScottyBrown\nWCT\n\n\n1\n0\n280\n220\n2000\nJohnsrud\nRBT\n\n\n1\n0\n260\n200\n2000\nScottyBrown\nWCT"
   },
   {
     "objectID": "slides/week1-day2.html#section-4",
