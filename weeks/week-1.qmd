@@ -1,17 +1,7 @@
 ---
 title: 'Week One: Foundations of Statistics'
 subtitle: Winter 2023
-format:
-  html:
-    theme: minty
-    fontsize: 1em
-    mainfont: "sans-serif"
-    number-sections: true
-    section-divs: true
-    code-block-bg: '#76b5c5'
-    highlight-style: monochrome
-    embed-resources: true
-    standalone: true
+format: html
 editor: visual
 execute:
   echo: true
@@ -144,4 +134,3 @@ If you are having a hard time finding a peer reviewed journal article, here is a
 ## Statistical Critique Step 0 -- Due Friday by 5pm
 
 Upload a PDF of your journal article to the Canvas assignment portal.
-

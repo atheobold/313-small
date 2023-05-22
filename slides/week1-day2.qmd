@@ -3,8 +3,7 @@ title: "Working with Data"
 format: 
   revealjs:
     theme: night
-    embed-resources: true
-    standalone: true
+embed-resources: true
 editor: visual
 execute: 
   echo: false

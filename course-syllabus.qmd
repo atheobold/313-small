@@ -3,16 +3,11 @@ title: 'STAT 313: Applied Experimental Design and Regression Models'
 subtitle: "Winter 2023"
 format: 
   html: 
-    self-contained: true
-    theme: minty
-    fontsize: 1em
-    mainfont: sans-serif
+    embed-resources: true
     number-sections: true
     number-depth: 2
     table-of-contents: true
     section-divs: true
-    code-block-bg: "#76b5c5"
-    highlight-style: monochrome
 editor: visual
 execute: 
   echo: false
